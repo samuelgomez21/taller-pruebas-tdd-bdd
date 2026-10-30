@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Operating system and temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*~
+*.swp

@@ -8,19 +8,19 @@ public class AccountLock {
     private static final int MAX_FAILED_ATTEMPTS = 5;
     private static final long LOCK_DURATION_MILLIS = 15 * 60 * 1_000L;
 
-    private int failedAttempts;
-    private long lockStartTimeMillis;
+    private int consecutiveFailedAttempts;
+    private long lockStartedAtMillis;
 
     public void registerFailedAttempt(long currentTimeMillis) {
-        failedAttempts++;
+        consecutiveFailedAttempts++;
 
-        if (failedAttempts == MAX_FAILED_ATTEMPTS) {
-            lockStartTimeMillis = currentTimeMillis;
+        if (consecutiveFailedAttempts == MAX_FAILED_ATTEMPTS) {
+            lockStartedAtMillis = currentTimeMillis;
         }
     }
 
     public boolean isAccountLocked(long currentTimeMillis) {
-        return failedAttempts >= MAX_FAILED_ATTEMPTS
-                && currentTimeMillis - lockStartTimeMillis < LOCK_DURATION_MILLIS;
+        return consecutiveFailedAttempts >= MAX_FAILED_ATTEMPTS
+                && currentTimeMillis - lockStartedAtMillis < LOCK_DURATION_MILLIS;
     }
 }

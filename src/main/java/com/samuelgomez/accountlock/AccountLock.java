@@ -23,4 +23,8 @@ public class AccountLock {
         return consecutiveFailedAttempts >= MAX_FAILED_ATTEMPTS
                 && currentTimeMillis - lockStartedAtMillis < LOCK_DURATION_MILLIS;
     }
+
+    public boolean canLogin(boolean credentialsCorrect, long currentTimeMillis) {
+        return credentialsCorrect && !isAccountLocked(currentTimeMillis);
+    }
 }
